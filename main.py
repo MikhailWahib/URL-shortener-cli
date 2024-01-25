@@ -65,11 +65,7 @@ while True:
     print("2. Show Shortened URLs")
     print("3. Exit")
 
-    try:
-        option = int(input("Enter option: "))
-    except ValueError:
-        print("Invalid input. Please enter a number.")
-        continue
+    option = int(input("Enter option: "))
 
     if option == 1:
         shorten_url()
@@ -77,5 +73,3 @@ while True:
         show_shortened_urls()
     elif option == 3:
         exit()
-    else:
-        print("Invalid option. Please enter a valid option.")
