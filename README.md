@@ -21,5 +21,5 @@ This Tool uses this [URL Shortener API](https://github.com/MikhailWahib/url-shor
 2. **Run the Tool:**
    - Execute the script with the URL you want to shorten:
      ```bash
-     python main.py
+     python3 main.py
      ```

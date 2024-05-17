@@ -2,23 +2,31 @@ import requests
 import os
 import getpass
 
-# clear screen
-os.system("cls")
+
+def clear_screen():
+    curOs = os.name
+
+    if curOs == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+
+clear_screen()
 
 print("|---------------------------------------------|")
 print("|         Welcome to URL Shortener            |")
 print("|                                             |")
 print("|        For registration, go to:             |")
 print("|                                             |")
-print("| https://url-shortener-mw.vercel.app/register|")
+print("| https://url-shortener-mw.vercel.app/signup  |")
 print("|---------------------------------------------|")
 print("\n Note: Server may take some time to respond for the first time, please wait ...")
 print("\n Please enter your credentials: ")
 username = input("\n username: ")
 password = getpass.getpass(" password: ")
 
-# clear screen
-os.system("cls")
+clear_screen()
 
 print("Loading ...")
 
@@ -29,8 +37,7 @@ if login_res.status_code != 200:
     print("Login Failed")
     exit()
 
-# clear screen
-os.system("cls")
+clear_screen()
 
 token = login_res.cookies.get("jwt")
 
@@ -49,7 +56,12 @@ def shorten_url():
 def show_shortened_urls():
     user_urls_res = requests.get(
         "https://url-shortener-api-56k6.onrender.com/api/v1/users/urls", cookies={"jwt": token})
+    if user_urls_res.status_code != 200:
+        print("No shortened URLs found")
+        input("\n Press Enter to return to the menu \n")
+        return
     user_urls = user_urls_res.json()["urls"]
+
     for url in user_urls:
         print("----------------------------------")
         print(f"Original URL: {url['originalUrl']}")
@@ -58,8 +70,7 @@ def show_shortened_urls():
 
 
 while True:
-    # clear screen
-    os.system("cls")
+    clear_screen()
 
     print("1. Shorten URL")
     print("2. Show Shortened URLs")
